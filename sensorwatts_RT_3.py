@@ -16,7 +16,7 @@ IP_SW = st.text_input("IP SensorWatts 192.168.X.Y")
 
 # Esperar hasta que se ingrese una IP válida
 if IP_SW:
-    EVENTS_URL = f"http://{IP_SW}/events"
+    EVENTS_URL = f"{IP_SW}/events"
     #st.success(f"Dirección IP establecida: {EVENTS_URL}")
 else:
     st.warning("Por favor, ingrese la dirección IP para continuar.")
