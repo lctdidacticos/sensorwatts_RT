@@ -56,7 +56,7 @@ async def listen_to_events():
             break  # Detiene la actualización si está en modo Estadística
         try:
             timeout = aiohttp.ClientTimeout(total=None, sock_connect=10, sock_read=30)
-            async with aiohttp.ClientSession(timeout=timeout,connector=aiohttp.TCPConnector(ssl=False)) as session:
+            async with aiohttp.ClientSession(timeout=timeout,connector=aiohttp) as session:
                 async with session.get(EVENTS_URL) as response:
                     if response.status == 200:
                         async for line in response.content:
