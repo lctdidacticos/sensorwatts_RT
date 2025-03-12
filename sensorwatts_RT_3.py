@@ -129,14 +129,23 @@ if not st.session_state.modo_estadistica:
 
 
 
-async def start_async_tasks():
-    await main()  # Llamamos a la función `main()` de forma segura
 
+# Verificamos si la tarea ya está corriendo en session_state
+if "task_running" not in st.session_state:
+    st.session_state.task_running = False
+
+async def start_async_tasks():
+    if not st.session_state.task_running:
+        st.session_state.task_running = True
+        await main()
+
+# Iniciamos la tarea de forma segura sin bloquear Streamlit
 async def run_async():
-    loop = asyncio.new_event_loop()  # Creamos un nuevo event loop
+    loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     loop.run_until_complete(start_async_tasks())
 
-# Ejecutamos la función asincrónica en Streamlit
-st.experimental_singleton(lambda: asyncio.create_task(run_async()))
+# Llamamos la función en Streamlit sin usar experimental_singleton
+if not st.session_state.task_running:
+    asyncio.create_task(run_async())
 
