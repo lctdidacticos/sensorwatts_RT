@@ -17,14 +17,9 @@ IP_SW = st.text_input("IP SensorWatts 192.168.X.Y")
 # Esperar hasta que se ingrese una IP válida
 if IP_SW:
     EVENTS_URL = f"{IP_SW}/events"
-    #st.success(f"Dirección IP establecida: {EVENTS_URL}")
 else:
     st.warning("Por favor, ingrese la dirección IP para continuar.")
     st.stop()  # Detiene la ejecución del script hasta que se ingrese una IP
-
-#st.write(EVENTS_URL)
-#"http://192.168.1.204/events" Direccion IP SensorWatts / Oficina
-#"http://192.168.0.208/events" Direccion IP SensorWatts /Casa
 
 columns_dict = {
     "voltaje": "Voltaje",
@@ -56,7 +51,7 @@ async def listen_to_events():
             break  # Detiene la actualización si está en modo Estadística
         try:
             timeout = aiohttp.ClientTimeout(total=None, sock_connect=10, sock_read=30)
-            async with aiohttp.ClientSession(timeout=timeout,connector=aiohttp) as session:
+            async with aiohttp.ClientSession(timeout=timeout) as session:
                 async with session.get(EVENTS_URL) as response:
                     if response.status == 200:
                         async for line in response.content:
@@ -70,7 +65,7 @@ async def listen_to_events():
                                         new_data['Tiempo'] = new_data['Tiempo'].apply(
                                             lambda x: str(datetime.timedelta(seconds=int(x)))
                                         )
-                                                                                                           
+                                                                                                            
                                     new_data.rename(columns=columns_dict, inplace=True)
                                     new_data.drop(columns=[col for col in ['MAC'] if col in new_data.columns], inplace=True, errors='ignore')
                                     dataframe = pd.concat([dataframe, new_data], ignore_index=True).tail(100)
@@ -113,7 +108,6 @@ if not st.session_state.modo_estadistica:
     potencia_placeholder = m1.empty()
     energia_placeholder = m2.empty()
     
-
     async def main():
         asyncio.create_task(listen_to_events())
         iteration = 0  # Contador para claves únicas
@@ -133,4 +127,4 @@ if not st.session_state.modo_estadistica:
                 
             await asyncio.sleep(1)
 
-    asyncio.run(main())
+    asyncio.create_task(main())
