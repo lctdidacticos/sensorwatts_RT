@@ -147,5 +147,19 @@ async def run_async():
 
 # Llamamos la función en Streamlit sin usar experimental_singleton
 if not st.session_state.task_running:
-    asyncio.create_task(run_async())
+    import asyncio
+
+async def start_async_tasks():
+    await main()  # Ejecuta la función `main()` de forma segura
+
+async def run_async():
+    loop = asyncio.get_event_loop()
+    if loop.is_running():  # Si el loop ya está corriendo, ejecutamos la tarea dentro de él
+        await start_async_tasks()
+    else:
+        loop.run_until_complete(start_async_tasks())
+
+# En Streamlit, ejecutamos la tarea de forma segura
+asyncio.run(run_async())
+
 
