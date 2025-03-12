@@ -127,4 +127,16 @@ if not st.session_state.modo_estadistica:
                 
             await asyncio.sleep(1)
 
-    asyncio.create_task(main())
+
+
+async def start_async_tasks():
+    await main()  # Llamamos a la función `main()` de forma segura
+
+async def run_async():
+    loop = asyncio.new_event_loop()  # Creamos un nuevo event loop
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(start_async_tasks())
+
+# Ejecutamos la función asincrónica en Streamlit
+st.experimental_singleton(lambda: asyncio.create_task(run_async()))
+
