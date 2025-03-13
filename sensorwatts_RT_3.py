@@ -2,6 +2,7 @@
 
 import asyncio
 import streamlit as st
+from streamlit_javascript import st_javascript
 import pandas as pd
 import plotly.express as px
 import aiohttp
@@ -90,11 +91,9 @@ with col2:
     st.title("Dashboard en Tiempo Real")
 
 # Botón para cambiar entre modos
+app_url = "https://mainpy-8hhzdhejmj8f752qpnlhzq.streamlit.app"  # Reemplaza con la URL real de tu App
 if st.button("Estadística"):
-    # Reemplaza con la URL real de tu app en Streamlit Cloud
-    app_url = "https://mainpy-8hhzdhejmj8f752qpnlhzq.streamlit.app"
-    js = f"window.open('{app_url}', '_blank')"
-    st.markdown(f'<script>{js}</script>', unsafe_allow_html=True)
+    st_javascript(f"window.open('{app_url}', '_blank')")
 
 
 # Lógica de actualización si está en modo "Tiempo Real"
