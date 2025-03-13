@@ -90,12 +90,11 @@ with col2:
     st.title("Dashboard en Tiempo Real")
 
 # Botón para cambiar entre modos
-if st.button("Estadística" if not st.session_state.modo_estadistica else "Tiempo Real"):
-    toggle_modo()
-    if st.session_state.modo_estadistica:
-        subprocess.Popen(["main.py"])
-    else:
-        st.rerun()
+if st.button("Estadística"):
+    # Reemplaza con la URL real de tu app en Streamlit Cloud
+    app_url = "https://mainpy-8hhzdhejmj8f752qpnlhzq.streamlit.app/"
+    js = f"window.open('{app_url}', '_blank')"
+    st.markdown(f'<script>{js}</script>', unsafe_allow_html=True)
 
 
 # Lógica de actualización si está en modo "Tiempo Real"
