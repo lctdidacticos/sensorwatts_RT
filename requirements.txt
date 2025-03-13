@@ -1,3 +1,5 @@
 streamlit
 plotly
 aiohttp==3.11.3
+streamlit-javascript
+
