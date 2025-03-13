@@ -90,9 +90,12 @@ with col2:
     st.title("Dashboard en Tiempo Real")
 
 # Botón para cambiar entre modos
-if st.button("Estadística"):
-    st.markdown('<a href="/main" target="_blank">Abrir Estadísticas</a>', unsafe_allow_html=True)
-
+if st.button("Estadística" if not st.session_state.modo_estadistica else "Tiempo Real"):
+    toggle_modo()
+    if st.session_state.modo_estadistica:
+        subprocess.Popen(["main.py"])
+    else:
+        st.rerun()
 
 
 # Lógica de actualización si está en modo "Tiempo Real"
