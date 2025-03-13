@@ -90,12 +90,9 @@ with col2:
     st.title("Dashboard en Tiempo Real")
 
 # Botón para cambiar entre modos
-if st.button("Estadística" if not st.session_state.modo_estadistica else "Tiempo Real"):
-    toggle_modo()
-    if st.session_state.modo_estadistica:
-        subprocess.Popen(["streamlit", "run", "main.py"])
-    else:
-        st.rerun()
+if st.button("Estadística"):
+    st.markdown('<meta http-equiv="refresh" content="0; URL=/main">', unsafe_allow_html=True)
+
 
 # Lógica de actualización si está en modo "Tiempo Real"
 if not st.session_state.modo_estadistica:
