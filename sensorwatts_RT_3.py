@@ -91,7 +91,8 @@ with col2:
 
 # Botón para cambiar entre modos
 if st.button("Estadística"):
-    st.markdown('<meta http-equiv="refresh" content="0; URL=/main">', unsafe_allow_html=True)
+    st.markdown('<a href="/main" target="_blank">Abrir Estadísticas</a>', unsafe_allow_html=True)
+
 
 
 # Lógica de actualización si está en modo "Tiempo Real"
