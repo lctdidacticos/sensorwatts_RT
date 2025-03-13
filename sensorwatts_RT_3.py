@@ -92,7 +92,7 @@ with col2:
 # Botón para cambiar entre modos
 if st.button("Estadística"):
     # Reemplaza con la URL real de tu app en Streamlit Cloud
-    app_url = "https://mainpy-8hhzdhejmj8f752qpnlhzq.streamlit.app/"
+    app_url = "https://mainpy-8hhzdhejmj8f752qpnlhzq.streamlit.app"
     js = f"window.open('{app_url}', '_blank')"
     st.markdown(f'<script>{js}</script>', unsafe_allow_html=True)
 
