@@ -19,7 +19,7 @@ IP_SW = st.text_input("URL_SensorWatts")
 if IP_SW:
     EVENTS_URL = f"{IP_SW}/events"
 else:
-    st.warning("Por favor, ingrese la dirección IP para continuar.")
+    st.warning("Por favor, ingrese la URL para continuar.")
     st.stop()  # Detiene la ejecución del script hasta que se ingrese una IP
 
 columns_dict = {
