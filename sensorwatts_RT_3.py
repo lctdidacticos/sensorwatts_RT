@@ -13,7 +13,7 @@ from PIL import Image
 st.set_page_config(page_title="Dashboard Tiempo Real", layout="wide") 
 
 # Input para capturar la IP
-IP_SW = st.text_input("IP_Encript_SensorWatts")
+IP_SW = st.text_input("URL_SensorWatts")
 
 # Esperar hasta que se ingrese una IP válida
 if IP_SW:
